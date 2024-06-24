@@ -6,6 +6,37 @@ services:
       context: .
       target: dev
     ports:
-      - "80:80"
+      - "8080:8080"
     volumes:
       - .:/opt/app/api
+
+  frontend:
+    image: app_digitalisation_front
+    container_name: AppDigitalisation_front
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - "./frontend/src:/var/www/html/src"
+      - "./frontend/public:/var/www/html/public"
+    ports:
+      - "80:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+
+  db:
+    image: postgres
+    # user: "${USER_ID}:${GROUP_ID}"
+    container_name: AppDigitalisation_db
+    volumes:
+      - "../backend/database:/var/lib/postgresql/data/"
+    environment:
+      - POSTGRES_DB=AppDigitalisation
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=c1hg6jt6
+    ports:
+      - "5432:5432"
+
+volumes:
+  database:
