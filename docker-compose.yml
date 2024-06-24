@@ -1,0 +1,11 @@
+services:
+  app:
+    container_name: AppDigitalisation_back
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: dev
+    ports:
+      - "80:80"
+    volumes:
+      - .:/opt/app/api
