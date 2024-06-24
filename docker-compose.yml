@@ -1,5 +1,6 @@
 services:
   app:
+    image: app_digitalisation_back
     container_name: AppDigitalisation_back
     build:
       dockerfile: Dockerfile
