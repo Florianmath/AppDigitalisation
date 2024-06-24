@@ -4,18 +4,19 @@ import "./App.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { Input } from "@nextui-org/input";
+import { Pagination } from "@nextui-org/react";
 
 function App() {
   return (
     <NextUIProvider>
-      <div className="flex flex-col mx-4">
-        <h1 className="mt-4 font-bold text-3xl"> Entreprise </h1>
-        <div className="flex flex-col gap-4 mt-4 text-black">
+      <div className="flex flex-col items-center mx-4">
+        <h1 className="mt-4 font-bold text-3xl left-0"> Entreprise </h1>
+        <div className="flex flex-col gap-4 mt-4 text-black w-7/12">
           <div className="flex flex-col gap-2">
             <h3 className="text-default-500 text-small">
               Dans quel secteur l'entreprise opère-t-elle ?
             </h3>
-            <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-4 md:mb-0 gap-4">
+            <div className="flex max-w-xl flex-wrap items-end md:flex-nowrap mb-4 md:mb-0 gap-4">
               <Input type="email" label="Réponse" labelPlacement="inside" />
             </div>
           </div>
@@ -74,17 +75,16 @@ function App() {
             </div>
           </div>
         </div>
-        <Accordion>
-          <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
-            test
-          </AccordionItem>
-          <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
-            {"reponse2"}
-          </AccordionItem>
-          <AccordionItem key="3" aria-label="Accordion 3" title="Accordion 3">
-            {"reponse3"}
-          </AccordionItem>
-        </Accordion>
+
+        <div className="mt-5">
+          <Pagination
+            loop
+            showControls
+            color="success"
+            total={3}
+            initialPage={1}
+          />
+        </div>
       </div>
     </NextUIProvider>
   );
