@@ -3,7 +3,7 @@ import * as React from "react";
 import "./App.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { Input } from "@nextui-org/input";
-import CustomPagination from "./customPagination";
+import { Pagination } from "@nextui-org/react";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -96,10 +96,14 @@ function App() {
           </div>
         )}
         <div className="pagination-container">
-          <CustomPagination
-            currentPage={currentPage}
-            totalPages={4}
-            onPageChange={handlePageChange}
+          <Pagination
+            loop
+            showControls
+            color="success"
+            total={pageTitles.length}
+            initialPage={currentPage}
+            onChange={(page) => handlePageChange(page)}
+            className="custom-pagination"
           />
         </div>
       </div>
