@@ -8,6 +8,7 @@ module.exports = {
     // make sure it's pointing to the ROOT node_module
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/components/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {},
