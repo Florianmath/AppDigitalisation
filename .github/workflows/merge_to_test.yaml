@@ -4,34 +4,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  createPullRequest:
+  create_pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Make changes to pull request
-        run: date +%s > report.txt
-
-      - name: Create Pull Request
-        id: cpr
-        uses: ./
+      - name: Checkout code
+        uses: actions/checkout@v2
         with:
-          token: ${{ secrets.MY_GITHUB_TOKEN }}
-          commit-message: Mise à jour TestPR 
-          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor }}+${{ github.actor }}@users.noreply.github.com>
-          signoff: false
-          base: TestPR  # Branche de destination
-          head: Florian  # Branche source
-          delete-branch: false
-          title: 'Mise à jour TestPR'
-          body: |
-            Mise à jour TestPR body
-          labels: |
-            report
-            automated pr
-          assignees: Florianmath
-          reviewers: Florianmath
-          team-reviewers: |
-          milestone: 1
-          draft: false
+          ref: Florian  # Checkout de la branche Florian
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Create PR
+        run: |
+          # Créer la PR en utilisant l'API GitHub
+          curl \
+            -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/pulls \
+            -d "{\"title\":\"Manual PR from Florian to TestPR\",\"head\":\"Florian\",\"base\":\"TestPR\"}"
