@@ -1,4 +1,4 @@
-name: PR Version Update + Validation Title
+name: PR Version Update
 
 on:
   pull_request:
