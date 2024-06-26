@@ -1,6 +1,3 @@
--- Define the custom type 'axe' if necessary
--- CREATE TYPE axe AS ENUM ('value1', 'value2', ...);
-
 CREATE TABLE entreprise (
     ent_pk_id SERIAL PRIMARY KEY,
     ent_nom VARCHAR(50),
@@ -37,9 +34,9 @@ CREATE TABLE choix_possible (
 CREATE TABLE reponse (
     rep_fk_entreprise INTEGER,
     rep_fk_question INTEGER,
-    rep_fk_choix INTEGER,
     rep_date TIMESTAMP,
+    rep_choix INTEGER,
+    rep_commentaire TEXT,
     CONSTRAINT fk_reponse_question FOREIGN KEY (rep_fk_question) REFERENCES question(que_pk_id),
-    CONSTRAINT fk_reponse_choix FOREIGN KEY (rep_fk_choix) REFERENCES choix_possible(cho_pk_id),
     CONSTRAINT fk_reponse_entreprise FOREIGN KEY (rep_fk_entreprise) REFERENCES entreprise(ent_pk_id)
 );
