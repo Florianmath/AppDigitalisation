@@ -1,4 +1,4 @@
-name: Create PR to TestPR
+name: Create PR to TestPR2
 
 on:
   workflow_dispatch: # Déclenchement manuel depuis l'interface GitHub
