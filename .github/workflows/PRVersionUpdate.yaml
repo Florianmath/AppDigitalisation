@@ -27,10 +27,10 @@ jobs:
             echo "Veuillez inclure l'un de ces mots-clés dans le titre de votre Pull Request."
             exit 1
           fi
-          
+
   update_version:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize'
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -38,14 +38,14 @@ jobs:
       - name: Extract version from last PR title
         id: extract_version
         run: |
-          latest_pr_titles=$(curl -s -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=closed&sort=updated&direction=desc&per_page=100" | jq -r '.[].title')
+          latest_pr_titles=$(curl -s -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls?state=closed&sort=updated&direction=desc&per_page=100" | jq -r '.[].title')
           version=""
-          for title in $latest_pr_titles; do
+          while read -r title; do
             version=$(echo "$title" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
             if [[ ! -z "$version" ]]; then
               break
             fi
-          done
+          done <<< "$latest_pr_titles"
           if [[ -z "$version" ]]; then
             version="1.0.0"
           fi
@@ -54,18 +54,20 @@ jobs:
       - name: Extract PR title and labels
         id: pr_info
         run: |
-          echo "::set-output name=title::$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)"
-          echo "::set-output name=labels::$(jq -r '.pull_request.labels[].name' $GITHUB_EVENT_PATH)"
+          pr_title=$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)
+          echo "::set-output name=title::$pr_title"
+          pr_labels=$(jq -r '.pull_request.labels[].name' $GITHUB_EVENT_PATH)
+          echo "::set-output name=labels::$pr_labels"
 
       - name: Update version and PR title
         run: |
-          # Récupérer le titre de la PR et les labels
+          # Récupérer le titre de la PR
           title="${{ steps.pr_info.outputs.title }}"
           echo "$title" > title.txt
           
           # Récupérer la dernière version de la PR
           version="${{ steps.extract_version.outputs.version }}"
-
+          
           # Écrire la version dans un fichier de sortie
           echo "$version" > version.txt
         continue-on-error: true
@@ -85,13 +87,11 @@ jobs:
               version=$(echo $version | awk -F. '{$3++} 1' OFS=.)
           fi
 
-
           # Mettre à jour le titre de la PR avec la nouvelle version
           new_title="${version} - ${title}"
           
           # Enregistrer la nouvelle valeur de new_title dans un fichier de sortie
           echo "$new_title" > new_title.txt
-
 
       - name: Update PR title
         run: |
@@ -106,4 +106,4 @@ jobs:
             -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d "{\"title\": \"$new_title\"}" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}"
+            "https://api.github.com/repos/${{ github.repository }}/pulls/${pr_number}"
