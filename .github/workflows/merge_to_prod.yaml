@@ -1,4 +1,4 @@
-name: Create PR to TestPR
+name: Create PR from main to prod
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: Florian  # Checkout de la branche Florian
+          ref: main  # Checkout de la branche main
 
       - name: Set up Git
         run: |
@@ -25,4 +25,4 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.MY_GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/pulls \
-            -d "{\"title\":\"Manual PR from Florian to TestPR\",\"head\":\"Florian\",\"base\":\"TestPR\"}"
+            -d "{\"title\":\"Pull Request manuel issue de la branche main vers prod\",\"head\":\"main\",\"base\":\"prod\"}"
