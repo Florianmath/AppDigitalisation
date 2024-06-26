@@ -5,6 +5,29 @@ on:
     types: [opened, reopened, synchronize]
 
 jobs:
+  validate_pr_title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Extract PR title
+        id: pr_info
+        run: |
+          echo "::set-output name=title::$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)"
+
+      - name: Validate PR title
+        run: |
+          title="${{ steps.pr_info.outputs.title }}"
+          if [[ $title =~ Release ]]; then
+            echo "La Pull Request contient le mot-clé Release. Arrêt du processus."
+            exit 0
+          elif [[ ! $title =~ (Majeur|Mineur|Patch) ]]; then
+            echo "Le titre de la Pull Request ne contient pas les mots-clés Majeur, Mineur ou Patch."
+            echo "Veuillez inclure l'un de ces mots-clés dans le titre de votre Pull Request."
+            exit 1
+          fi
+          
   update_version:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize'
