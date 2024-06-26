@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Link } from "@nextui-org/link";
 import "../App.css";
+import { useParams } from "react-router-dom";
 
 function SyntheseEntreprise() {
   const [entreprises, setEntreprises] = React.useState([]);
-  const params = React.useParams();
+  const params = useParams();
 
   async function getEntreprise() {
     let response = await fetch("/api/entreprise", {
