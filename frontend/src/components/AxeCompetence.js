@@ -25,13 +25,15 @@ function AxeCompetence() {
             <div className="flex gap-1 w-full flex-row ">
               <CheckboxGroup
                 label="Reponses"
-                value={groupSelected}
-                onChange={setGroupSelected}
+                // value={groupSelected}
+                // onChange={setGroupSelected}
                 orientation="horizontal"
                 color="success"
                 classNames={{
                   base: "w-full",
                 }}
+                // isReadOnly={true}
+                // defaultValue={"2"}
               >
                 <CustomCheckbox
                   value="2"
@@ -43,6 +45,8 @@ function AxeCompetence() {
                     url: "https://twitter.com/jrgarciadev",
                     role: "2 Points",
                   }}
+                  readOnly={true}
+                  selected={true}
                 />
                 <CustomCheckbox
                   value="1"

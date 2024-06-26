@@ -1,11 +1,11 @@
 import * as React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { NextUIProvider } from "@nextui-org/react";
-import Entreprise from "./components/Entreprise";
-import { Pagination } from "@nextui-org/react";
-import AxeCompetence from "./components/AxeCompetence";
-import AxeReactivite from "./components/AxeReactivite";
-import AxeNumerique from "./components/AxeNumerique";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
+import Synthese from "./components/Synthese";
+import SyntheseEntreprise from "./components/SyntheseEntreprise";
 
 function App() {
   function check(number) {
@@ -22,25 +22,17 @@ function App() {
   }
   return (
     <NextUIProvider>
-      <div className="flex flex-col items-center mx-4">
-        <Entreprise />
-        <AxeCompetence />
-        <AxeReactivite />
-        <AxeNumerique />
-        <div className="mb-2 bottom-0 fixed">
-          <Pagination
-            loop
-            showControls
-            color="success"
-            total={4}
-            initialPage={1}
-            isCompact
-            size="lg"
-            showShadow
-            onChange={(number) => check(number)}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/synthese" element={<Synthese />} />
+          <Route
+            path="/synthese/:nomEntreprise"
+            element={<SyntheseEntreprise />}
           />
-        </div>
-      </div>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
     </NextUIProvider>
   );
 }

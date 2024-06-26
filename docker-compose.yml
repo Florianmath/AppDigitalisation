@@ -31,7 +31,7 @@ services:
     # user: "${USER_ID}:${GROUP_ID}"
     container_name: AppDigitalisation_db
     volumes:
-      - "../backend/database:/var/lib/postgresql/data/"
+      - "./backend/database:/var/lib/postgresql/data/"
     environment:
       - POSTGRES_DB=AppDigitalisation
       - POSTGRES_USER=app
