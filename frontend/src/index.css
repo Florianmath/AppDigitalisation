@@ -9,9 +9,76 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.gradient {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    15deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 255, 156, 1) 64%,
+    rgba(124, 255, 115, 1) 100%
+  );
+}
+
+.axe {
+  transition: 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#entreprise.entreprise {
+  transform: translateX(0vw);
+}
+#entreprise.competence {
+  transform: translateX(-100vw);
+}
+#entreprise.reactivite {
+  transform: translateX(-200vw);
+}
+#entreprise.numerique {
+  transform: translateX(-300vw);
+}
+
+#AxeCompetence.entreprise {
+  transform: translateX(100vw);
+}
+#AxeCompetence.competence {
+  transform: translateX(0vw);
+}
+#AxeCompetence.reactivite {
+  transform: translateX(-100vw);
+}
+#AxeCompetence.numerique {
+  transform: translateX(-200vw);
+}
+
+#AxeReactivite.entreprise {
+  transform: translateX(200vw);
+}
+#AxeReactivite.competence {
+  transform: translateX(100vw);
+}
+#AxeReactivite.reactivite {
+  transform: translateX(0vw);
+}
+#AxeReactivite.numerique {
+  transform: translateX(-100vw);
+}
+
+#AxeNumerique.entreprise {
+  transform: translateX(300vw);
+}
+#AxeNumerique.competence {
+  transform: translateX(200vw);
+}
+#AxeNumerique.reactivite {
+  transform: translateX(100vw);
+}
+#AxeNumerique.numerique {
+  transform: translateX(0vw);
 }
