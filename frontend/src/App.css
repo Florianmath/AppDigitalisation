@@ -36,20 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.pagination-container {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-} 
-
-.prev-next-button {
-  transform: translateY(4px); 
-  font-size: 0.875rem; 
-}
-
-.page-button {
-  font-size: 1rem; 
-}
