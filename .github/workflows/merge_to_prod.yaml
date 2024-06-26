@@ -1,7 +1,12 @@
-name: Create PR from main to prod
+name: Create PR to prod
 
 on:
   workflow_dispatch:
+    inputs:
+      pr_prefix:
+        description: 'Prefix for PR title (e.g., Majeur, Mineur, Patch)'
+        required: true
+        default: 'Majeur'
 
 jobs:
   create_pr:
@@ -25,4 +30,4 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.MY_GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/pulls \
-            -d "{\"title\":\"Pull Request manuel issue de la branche main vers prod\",\"head\":\"main\",\"base\":\"prod\"}"
+            -d "{\"title\":\"${{ github.event.inputs.pr_prefix }} - Manual PR from main to prod\",\"head\":\"main\",\"base\":\"prod\"}"
