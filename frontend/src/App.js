@@ -8,6 +8,18 @@ import Synthese from "./components/Synthese";
 import SyntheseEntreprise from "./components/SyntheseEntreprise";
 
 function App() {
+  function check(number) {
+    console.log("test", number);
+    const pages = ["entreprise", "competence", "reactivite", "numerique"];
+
+    let divs = document.getElementsByClassName("axe");
+    Array.from(divs).forEach((div) => {
+      Array.from(pages).forEach((page) => {
+        div.classList.remove(page);
+      });
+      div.classList.add(pages[number - 1]);
+    });
+  }
   return (
     <NextUIProvider>
       <Router>
