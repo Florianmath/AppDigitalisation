@@ -117,3 +117,11 @@ jobs:
             -H "Content-Type: application/json" \
             -d "{\"title\": \"$new_title\"}" \
             "https://api.github.com/repos/${{ github.repository }}/pulls/${pr_number}"
+
+      - name: Commit version file
+        run: |
+          # Ajouter le fichier de version au repository
+          echo "${{ steps.extract_version.outputs.version }}" > version.txt
+          git add version.txt
+          git commit -m "Update version to ${{ steps.extract_version.outputs.version }}"
+          git push origin ${{ github.head_ref }}
