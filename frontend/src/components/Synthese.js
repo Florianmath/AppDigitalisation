@@ -1,12 +1,19 @@
 import * as React from "react";
-import { Link } from "@nextui-org/link";
+import { Pagination } from "@nextui-org/react";
 import "../App.css";
+import { useNavigate, useParams } from "react-router-dom";
+import SyntheseEntreprise from "./SyntheseEntreprise";
+import AxeCompetenceSynthese from "./AxeCompetenceSynthese";
+import AxeNumeriqueSynthese from "./AxeNumeriqueSynthese";
+import AxeReactiviteSynthese from "./AxeReactiviteSynthese";
 
 function Synthese() {
-  const [entreprises, setEntreprises] = React.useState([]);
+  const [entreprises, setEntreprises] = React.useState();
+  const params = useParams();
+  const navigate = useNavigate();
 
   async function getEntreprise() {
-    let response = await fetch("/api/entreprise", {
+    let response = await fetch("/api/entreprise/" + params.idEntreprise, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -14,9 +21,27 @@ function Synthese() {
     }).catch((error) => {
       console.log(error);
     });
+    response = await response.json();
 
-    // console.log(await response.json());
-    setEntreprises(await response.json());
+    if (Object.keys(JSON.parse(response)["categorie"]).length == 0) {
+      navigate("/");
+    }
+    console.log(JSON.parse(response));
+    // console.log(Object.keys(JSON.parse(response)["categorie"]).length == 0);
+    setEntreprises(JSON.parse(response));
+  }
+
+  function check(number) {
+    // console.log("test", number);
+    const pages = ["entreprise", "competence", "reactivite", "numerique"];
+
+    let divs = document.getElementsByClassName("axe");
+    Array.from(divs).forEach((div) => {
+      Array.from(pages).forEach((page) => {
+        div.classList.remove(page);
+      });
+      div.classList.add(pages[number - 1]);
+    });
   }
 
   React.useEffect(() => {
@@ -24,21 +49,23 @@ function Synthese() {
   }, []);
   return (
     <div className="flex flex-col items-center mx-4">
-      <div className="axe entreprise shadow-xl rounded-2xl w-[80vw] px-14 pb-6 mt-6  absolute min-w-[600px] max-w-screen">
-        <h1 className="mt-4 font-bold text-4xl left-0">
-          Synthese des reponses des entreprises
-        </h1>
-        <div className="mt-14 flex flex-col justify-between">
-          {entreprises.map((entreprise, i) => (
-            <Link
-              href={"/synthese/" + (parseInt(i) + 1)}
-              color="success"
-              size="lg"
-            >
-              {entreprise}
-            </Link>
-          ))}
-        </div>
+      <SyntheseEntreprise entreprises={entreprises} />
+      <AxeCompetenceSynthese entreprises={entreprises} />
+      <AxeNumeriqueSynthese entreprises={entreprises} />
+      <AxeReactiviteSynthese entreprises={entreprises} />
+
+      <div className="mb-2 bottom-0 fixed">
+        <Pagination
+          loop
+          showControls
+          color="success"
+          total={4}
+          initialPage={1}
+          isCompact
+          size="lg"
+          showShadow
+          onChange={(number) => check(number)}
+        />
       </div>
     </div>
   );
