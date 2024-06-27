@@ -125,8 +125,10 @@ jobs:
 
       - name: Commit version file
         run: |
+          # Récupérer la branche courante
+          current_branch=$(jq -r .pull_request.head.ref "$GITHUB_EVENT_PATH")
           # Ajouter le fichier de version au repository
           echo "${{ steps.extract_version.outputs.version }}" > version.txt
           git add version.txt
           git commit -m "Update version to ${{ steps.extract_version.outputs.version }}"
-          git push origin ${{ github.head_ref }}
+          git push origin "$current_branch"
