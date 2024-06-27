@@ -127,6 +127,10 @@ jobs:
         run: |
           # Récupérer la branche courante
           current_branch=$(jq -r .pull_request.head.ref "$GITHUB_EVENT_PATH")
+          
+          # Créer et passer sur une branche locale basée sur la branche courante
+          git checkout -b "$current_branch"
+          
           # Ajouter le fichier de version au repository
           echo "${{ steps.extract_version.outputs.version }}" > version.txt
           git add version.txt
