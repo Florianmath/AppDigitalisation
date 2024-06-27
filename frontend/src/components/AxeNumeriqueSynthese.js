@@ -7,7 +7,7 @@ import { CustomCheckbox } from "./CustomCheckBox";
 function AxeNumeriqueSynthese({ entreprises }) {
   return (
     <div
-      className="axe entreprise shadow-xl rounded-2xl w-[80vw] px-14 pb-12 mt-6  absolute min-w-[600px] max-w-screen"
+      className="axe entreprise shadow-xl rounded-2xl w-[80vw] px-14 pb-12 mt-28 absolute min-w-[600px] max-w-screen"
       id="AxeNumerique"
     >
       {entreprises ? (

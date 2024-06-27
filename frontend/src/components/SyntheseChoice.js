@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "@nextui-org/link";
 import "../App.css";
+import MyNavBar from "./MyNavBar";
 
 function SyntheseChoice() {
   const [entreprises, setEntreprises] = React.useState([]);
@@ -24,7 +25,8 @@ function SyntheseChoice() {
   }, []);
   return (
     <div className="flex flex-col items-center mx-4">
-      <div className="axe entreprise shadow-xl rounded-2xl w-[80vw] px-14 pb-6 mt-6  absolute min-w-[600px] max-w-screen">
+      <MyNavBar />
+      <div className="axe entreprise shadow-xl rounded-2xl w-[80vw] px-14 pb-6 mt-28  absolute min-w-[600px] max-w-screen">
         <h1 className="mt-4 font-bold text-4xl left-0">
           Synthese des reponses des entreprises
         </h1>
