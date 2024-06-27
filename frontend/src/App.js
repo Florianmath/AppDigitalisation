@@ -4,8 +4,8 @@ import "./App.css";
 import { NextUIProvider } from "@nextui-org/react";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
+import SyntheseChoice from "./components/SyntheseChoice";
 import Synthese from "./components/Synthese";
-import SyntheseEntreprise from "./components/SyntheseEntreprise";
 
 function App() {
   function check(number) {
@@ -25,11 +25,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/synthese" element={<Synthese />} />
-          <Route
-            path="/synthese/:nomEntreprise"
-            element={<SyntheseEntreprise />}
-          />
+          <Route path="/synthese" element={<SyntheseChoice />} />
+          <Route path="/synthese/:idEntreprise" element={<Synthese />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
