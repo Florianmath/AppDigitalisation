@@ -5,7 +5,7 @@ import "../App.css";
 function SyntheseEntreprise({ entreprises }) {
   return (
     <div
-      className="axe entreprise shadow-xl rounded-2xl w-[80vw] px-14 pb-6 mt-6  absolute min-w-[600px] max-w-screen"
+      className="axe entreprise shadow-xl rounded-2xl w-[80vw] px-14 pb-6 mt-28  absolute min-w-[600px] max-w-screen"
       id="entreprise"
     >
       <h1 className="mt-4 font-bold text-4xl left-0">

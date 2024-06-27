@@ -6,6 +6,7 @@ import SyntheseEntreprise from "./SyntheseEntreprise";
 import AxeCompetenceSynthese from "./AxeCompetenceSynthese";
 import AxeNumeriqueSynthese from "./AxeNumeriqueSynthese";
 import AxeReactiviteSynthese from "./AxeReactiviteSynthese";
+import MyNavBar from "./MyNavBar";
 
 function Synthese() {
   const [entreprises, setEntreprises] = React.useState();
@@ -49,6 +50,7 @@ function Synthese() {
   }, []);
   return (
     <div className="flex flex-col items-center mx-4">
+      <MyNavBar />
       <SyntheseEntreprise entreprises={entreprises} />
       <AxeCompetenceSynthese entreprises={entreprises} />
       <AxeNumeriqueSynthese entreprises={entreprises} />

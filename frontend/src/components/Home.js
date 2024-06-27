@@ -5,6 +5,7 @@ import { Pagination } from "@nextui-org/react";
 import AxeCompetence from "./AxeCompetence";
 import AxeReactivite from "./AxeReactivite";
 import AxeNumerique from "./AxeNumerique";
+import MyNavBar from "./MyNavBar";
 
 function Home() {
   function check(number) {
@@ -21,6 +22,7 @@ function Home() {
   }
   return (
     <div className="flex flex-col items-center mx-4">
+      <MyNavBar />
       <Entreprise />
       <AxeCompetence />
       <AxeReactivite />
