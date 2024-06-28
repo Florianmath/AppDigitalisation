@@ -6,6 +6,7 @@ import AxeCompetence from "./AxeCompetence";
 import AxeReactivite from "./AxeReactivite";
 import AxeNumerique from "./AxeNumerique";
 import MyNavBar from "./MyNavBar";
+import MyRadar from "./MyRadar";
 
 function Home() {
   function check(number) {
@@ -27,6 +28,8 @@ function Home() {
       <AxeCompetence />
       <AxeReactivite />
       <AxeNumerique />
+
+      <MyRadar notes={[2, 0.7, 1.2]} />
 
       <div className="mb-2 bottom-0 fixed">
         <Pagination
