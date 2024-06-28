@@ -29,8 +29,6 @@ function Home() {
       <AxeReactivite />
       <AxeNumerique />
 
-      <MyRadar notes={[2, 0.7, 1.2]} />
-
       <div className="mb-2 bottom-0 fixed">
         <Pagination
           loop
