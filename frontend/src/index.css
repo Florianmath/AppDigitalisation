@@ -59,6 +59,9 @@ code {
 #entreprise.numerique {
   transform: translateX(-300vw);
 }
+#entreprise.graph {
+  transform: translateX(-400vw);
+}
 
 #AxeCompetence.entreprise {
   transform: translateX(100vw);
@@ -71,6 +74,9 @@ code {
 }
 #AxeCompetence.numerique {
   transform: translateX(-200vw);
+}
+#AxeCompetence.graph {
+  transform: translateX(-300vw);
 }
 
 #AxeReactivite.entreprise {
@@ -85,6 +91,9 @@ code {
 #AxeReactivite.numerique {
   transform: translateX(-100vw);
 }
+#AxeReactivite.graph {
+  transform: translateX(-200vw);
+}
 
 #AxeNumerique.entreprise {
   transform: translateX(300vw);
@@ -96,5 +105,24 @@ code {
   transform: translateX(100vw);
 }
 #AxeNumerique.numerique {
+  transform: translateX(0vw);
+}
+#AxeNumerique.graph {
+  transform: translateX(-100vw);
+}
+
+#graph.entreprise {
+  transform: translateX(400vw);
+}
+#graph.competence {
+  transform: translateX(300vw);
+}
+#graph.reactivite {
+  transform: translateX(200vw);
+}
+#graph.numerique {
+  transform: translateX(100vw);
+}
+#graph.graph {
   transform: translateX(0vw);
 }
